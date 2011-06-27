@@ -1,12 +1,16 @@
 #include<stdio.h>
 
-int strcmp(const char *p, const char *q)
+/*
+  Checks if char* q starts with char* p
+ */
+int strstarts(const char *p, const char *q)
 {
   while(*p && *p == *q){
     ++p;
     ++q;
   }
-  return *p - *q;
+  // if *p is null return true else return diff
+  return *p ? *p - *q: 0;
 }
 
 /*
@@ -16,7 +20,7 @@ int brute_force(const char *needle, const char *haystack)
 {
   const char *h = haystack;
   while(*h++){
-    if(strcmp(needle, h) == 0)
+    if(strstarts(needle, h) == 0)
       return h - haystack;
   }
   return -1;
