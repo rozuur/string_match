@@ -1,7 +1,7 @@
-#include<stdio.h>
+ #include<stdio.h>
 #include<string.h>
 #define PRIME_BASE 39839
-#define MOD 60000
+#define MOD 40000
 
 /*
   Checks if char* q starts with char* p
@@ -29,7 +29,9 @@ int hash(const char *str, int len)
 int rehash(int hash, char remove, char add, int maxpow)
 {
   int remp = (remove * maxpow) % MOD;
-  int h = (hash - remp + add) % MOD;
+  int hsub = (hash - remp) % MOD;
+  int hmul = (hsub * PRIME_BASE) % MOD;
+  int h = (hmul + add) % MOD;
   if(h < 0) h += MOD;
   return h;
 }
@@ -70,7 +72,10 @@ int rabin_karp(const char *needle, const char *haystack)
 
     printf("roll = %d by adding %c and removing %c\n", roll_hash, *win_end, *win_start);
   }
-  return strstarts(needle, win_start);
+  if(strstarts(needle, win_start) == 0)
+    return win_start - haystack;
+  else
+    return -1;
 }
 
 int main(int argc, char **argv)
