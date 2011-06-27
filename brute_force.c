@@ -19,7 +19,7 @@ int strstarts(const char *p, const char *q)
 int brute_force(const char *needle, const char *haystack)
 {
   const char *h = haystack;
-  while(*h++){
+  for(;*h;++h){
     if(strstarts(needle, h) == 0)
       return h - haystack;
   }
