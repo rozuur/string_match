@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<string.h>
-#define PRIME_BASE 59999
+#define PRIME_BASE 39839
 #define MOD 60000
 
 /*
@@ -28,23 +28,23 @@ int hash(const char *str, int len)
 
 int rehash(int hash, char remove, char add, int maxpow)
 {
-  int h = (hash * PRIME_BASE) % MOD;
-  h = (h + add) % MOD;
-  h = h - remove * maxpow;
-  return h % MOD;
-  //((hash * PRIME_BASE) - (remove * maxpow) + add;
+  int remp = (remove * maxpow) % MOD;
+  int h = (hash - remp + add) % MOD;
+  if(h < 0) h += MOD;
+  return h;
 }
 
 int mod_pow(int base, int pow, int mod)
 {
+  printf("base = %d, pow = %d and mod = %d\n", base, pow, mod);
   int ret = 1;
   while(pow){
     if((pow % 2) == 1){
       ret = ret * base;
-      if(ret >= MOD) ret %= MOD;
+      if(ret >= mod) ret %= mod;
     }
     base = base * base;
-    if(base >= MOD) base %= MOD;
+    if(base >= mod) base %= mod;
     pow /= 2;
   }
   return ret;
@@ -57,16 +57,18 @@ int rabin_karp(const char *needle, const char *haystack)
 {
   // Rolling hash function for needle is calculated.
   int len = strlen(needle);
-  int maxpow = mod_pow(PRIME_BASE, len, MOD);
+  int maxpow = mod_pow(PRIME_BASE, len - 1, MOD);
   int hash_needle = hash(needle, len);
   int roll_hash = hash(haystack, len);
-
+  printf("roll = %d needle = %d mpow = %d\n", roll_hash, hash_needle, maxpow);
   const char *win_start = haystack;
   const char *win_end = haystack + len;
   for(;hash_needle != roll_hash; ++win_end, ++win_start){
     if(*win_end == '\0')
       return -1;
     roll_hash = rehash(roll_hash, *win_start, *win_end, maxpow);
+
+    printf("roll = %d by adding %c and removing %c\n", roll_hash, *win_end, *win_start);
   }
   return strstarts(needle, win_start);
 }
