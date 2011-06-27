@@ -2,7 +2,7 @@
 
 int strcmp(const char *p, const char *q)
 {
-  while(*p && *q && *p == *q){
+  while(*p && *p == *q){
     ++p;
     ++q;
   }
