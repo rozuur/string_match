@@ -1,4 +1,4 @@
- #include<stdio.h>
+include<stdio.h>
 #include<string.h>
 #define PRIME_BASE 39839
 #define MOD 40000
@@ -38,7 +38,6 @@ int rehash(int hash, char remove, char add, int maxpow)
 
 int mod_pow(int base, int pow, int mod)
 {
-  printf("base = %d, pow = %d and mod = %d\n", base, pow, mod);
   int ret = 1;
   while(pow){
     if((pow % 2) == 1){
@@ -62,15 +61,12 @@ int rabin_karp(const char *needle, const char *haystack)
   int maxpow = mod_pow(PRIME_BASE, len - 1, MOD);
   int hash_needle = hash(needle, len);
   int roll_hash = hash(haystack, len);
-  printf("roll = %d needle = %d mpow = %d\n", roll_hash, hash_needle, maxpow);
   const char *win_start = haystack;
   const char *win_end = haystack + len;
   for(;hash_needle != roll_hash; ++win_end, ++win_start){
     if(*win_end == '\0')
       return -1;
     roll_hash = rehash(roll_hash, *win_start, *win_end, maxpow);
-
-    printf("roll = %d by adding %c and removing %c\n", roll_hash, *win_end, *win_start);
   }
   if(strstarts(needle, win_start) == 0)
     return win_start - haystack;
