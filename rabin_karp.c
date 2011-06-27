@@ -1,4 +1,4 @@
-include<stdio.h>
+#include<stdio.h>
 #include<string.h>
 #define PRIME_BASE 39839
 #define MOD 40000
