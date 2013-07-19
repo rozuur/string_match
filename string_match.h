@@ -8,6 +8,7 @@
 #define STRING_MATCH_H_
 
 extern int strstarts(const char *p, const char *q);
+extern int getTimeDiffer(struct timeval start,  struct timeval end);
 
 extern int brute_force(const char *needle, const char *haystack);
 extern int brute_force_test(int argc, char **argv);

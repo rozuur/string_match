@@ -1,5 +1,7 @@
 #include<stdio.h>
 
+#include <sys/time.h>
+
 #include "string_match.h"
 /*
   Checks at each point if the needle is substring of haystack
@@ -35,7 +37,10 @@ int brute_force_test(int argc, char **argv)
   }
   int index = brute_force(argv[1], argv[2]);
   if(index >= 0)
-    printf("Found %s in %s at %d\n", argv[1], argv[2], index);
+  {
+    //printf("Found %s in %s at %d\n", argv[1], argv[2], index);
+  	printf("Found in at %d\n", index);
+  }
   else
     printf("Failed to find %s in %s\n", argv[1], argv[2]);
 #endif
