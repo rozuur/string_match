@@ -1,20 +1,10 @@
 #include<stdio.h>
 #include<string.h>
+
+#include "string_match.h"
+
 #define PRIME_BASE 39839
 #define MOD 40000
-
-/*
-  Checks if char* q starts with char* p
- */
-int strstarts(const char *p, const char *q)
-{
-  while(*p && *p == *q){
-    ++p;
-    ++q;
-  }
-  // if *p is null return true else return diff
-  return *p ? *p - *q: 0;
-}
 
 int hash(const char *str, int len)
 {
@@ -74,7 +64,7 @@ int rabin_karp(const char *needle, const char *haystack)
     return -1;
 }
 
-int main(int argc, char **argv)
+int rabin_karp_test(int argc, char **argv)
 {
 #if DEBUG
   {

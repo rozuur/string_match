@@ -1,18 +1,6 @@
 #include<stdio.h>
 
-/*
-  Checks if char* q starts with char* p
- */
-int strstarts(const char *p, const char *q)
-{
-  while(*p && *p == *q){
-    ++p;
-    ++q;
-  }
-  // if *p is null return true else return diff
-  return *p ? *p - *q: 0;
-}
-
+#include "string_match.h"
 /*
   Checks at each point if the needle is substring of haystack
  */
@@ -26,7 +14,7 @@ int brute_force(const char *needle, const char *haystack)
   return -1;
 }
 
-int main(int argc, char **argv)
+int brute_force_test(int argc, char **argv)
 {
 #if DEBUG
   {
