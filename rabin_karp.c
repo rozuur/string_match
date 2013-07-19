@@ -88,7 +88,7 @@ int main(int argc, char **argv)
         printf("Failed to find %s in %s\n", needle, haystack);
     }
   }
-#elif
+#else
   if(argc < 3){
     printf("Usage : <command> <pattern> <string>\n");
     return 0;
